@@ -33,7 +33,7 @@ public class ConexaoMySQL {
 		}
 		
 		
-		return connection;
+		return connection; //é pra funiconar
 	}
 
 }
