@@ -19,6 +19,15 @@ public class Exec {
 		System.out.println("4. Encerrar Programa");
 		System.out.println("Digite a opção: ");
 		escolha = scanner.nextInt();
+		switch(escolha) {
+		//BLOCO ADICIONAR ASSOCIADO
+		case 1 : 
+			escolha = 0;
+			System.out.println("1. Adicionar Associado Anualista:");
+			System.out.println("2. Adicionar Associado Mensalista:");
+			System.out.println("Digite a opção: ");
+			escolha = scanner.nextInt();
+		}
 		
 	}while(escolha!=4);
 		System.out.println("Saindo....");
