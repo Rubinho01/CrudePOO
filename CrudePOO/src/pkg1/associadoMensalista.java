@@ -1,9 +1,12 @@
 package pkg1;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class associadoMensalista extends Associado implements Valor {
 	private BigDecimal mensalidadeMensalista;
+	private BigDecimal taxa = new BigDecimal("1.03");
+	private BigDecimal ano = new BigDecimal("12.00");
 	public associadoMensalista(String cpfAssociado, String nomeAssociado, String emailAssociado, BigDecimal mensalidadeMensalista) {
 		super(cpfAssociado, nomeAssociado, emailAssociado);
 		this.mensalidadeMensalista = mensalidadeMensalista;
@@ -18,9 +21,16 @@ public class associadoMensalista extends Associado implements Valor {
 		this.mensalidadeMensalista = mensalidadeMensalista;
 	}
 
+	
+
+
+
 	@Override
-	public double calcularValor() {
-		// TODO Auto-generated method stub
-		return 0;
+	public BigDecimal calcularValor() {
+		BigDecimal valor = mensalidadeMensalista.multiply(ano);
+		valor = valor.multiply(taxa);
+		valor = valor.divide(ano,RoundingMode.HALF_UP);
+		valor = valor.setScale(2, RoundingMode.HALF_UP);
+		return valor;
 	}
 }

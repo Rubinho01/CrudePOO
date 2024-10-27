@@ -26,7 +26,6 @@ public class ConexaoMySQL {
 		String password = "";
 		try {
 			connection = DriverManager.getConnection(url, username, password);
-			System.out.println("Banco de Dados Conectado");
 		}catch (SQLException e) {
 			System.out.println(status);
 			e.printStackTrace();

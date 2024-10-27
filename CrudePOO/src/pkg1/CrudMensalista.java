@@ -1,4 +1,5 @@
 package pkg1;
+import java.math.BigDecimal;
 import java.sql.*;
 public class CrudMensalista {
 	Connection conn = null;
@@ -44,5 +45,48 @@ public class CrudMensalista {
             e.printStackTrace();
         }
     }
+	public void excluirMensalista(String cpf) {
+        String sql = "DELETE FROM mensalistas WHERE cpf_mensalista = ?";
+
+        try (Connection conn = ConexaoMySQL.getConexaoMySQL();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, cpf);
+            int linhasAfetadas = stmt.executeUpdate();
+            if (linhasAfetadas > 0) {
+                System.out.println("Mensalista com CPF " + cpf + " foi excluído com sucesso!");
+            } else {
+                System.out.println("Nenhum mensalista encontrado com o CPF " + cpf);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+	 public associadoMensalista buscarMensalistaPorCpf(String cpf) {
+	        String sql = "SELECT cpf_mensalista, nome_mensalista, email_mensalista, mensalidade FROM mensalistas WHERE cpf_mensalista = ?";
+	        associadoMensalista mensalista = null;
+
+	        try (Connection conn = ConexaoMySQL.getConexaoMySQL();
+	             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	            stmt.setString(1, cpf);
+	            ResultSet rs = stmt.executeQuery();
+
+	            if (rs.next()) {
+	                mensalista = new associadoMensalista(
+	                    rs.getString("cpf_mensalista"),
+	                    rs.getString("nome_mensalista"),
+	                    rs.getString("email_mensalista"),
+	                    rs.getBigDecimal("mensalidade")
+	                );
+	            }
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+
+	        return mensalista; // Retorna o objeto ou null se não encontrado
+	    }
+
 }
 
