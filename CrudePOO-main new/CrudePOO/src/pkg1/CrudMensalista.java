@@ -96,7 +96,16 @@ public class CrudMensalista {
 			 stmt.setBigDecimal(3, mensalidade);
 			 stmt.setString(4, cpf);
 			 stmt.executeUpdate();
+			 
+			 int linhasAfetadas = stmt.executeUpdate();
+	            if (linhasAfetadas > 0) {
+	                System.out.println("Mensalista do cpf" +""+  cpf +""+ "alterado com Sucesso");
+	            } else {
+	                System.out.println("Nenhum mensalista encontrado com o CPF " + cpf);
+	            }
+			
 	 }catch (SQLException e) {
+		 System.out.print("CPF Inválido");
          e.printStackTrace();
      }
 
