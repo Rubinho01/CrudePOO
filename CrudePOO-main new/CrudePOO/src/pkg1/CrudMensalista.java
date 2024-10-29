@@ -1,4 +1,5 @@
 package pkg1;
+import java.math.BigDecimal;
 import java.sql.*;
 public class CrudMensalista {
 	Connection conn = null;
@@ -86,6 +87,19 @@ public class CrudMensalista {
 
 	        return mensalista; // Retorna o objeto ou null se não encontrado
 	    }
+	 public void atualizarMensalista(String nome,String email, BigDecimal mensalidade, String cpf) {
+		 String sql = "UPDATE mensalistas SET nome_mensalista = ?, email_mensalista = ?, mensalidade = ? WHERE cpf_mensalista = ? ";
+		 try (Connection conn = ConexaoMySQL.getConexaoMySQL();
+	             PreparedStatement stmt = conn.prepareStatement(sql)) {
+			 stmt.setString(1, nome);
+			 stmt.setString(2, email);
+			 stmt.setBigDecimal(3, mensalidade);
+			 stmt.setString(4, cpf);
+			 stmt.executeUpdate();
+	 }catch (SQLException e) {
+         e.printStackTrace();
+     }
 
+}
 }
 

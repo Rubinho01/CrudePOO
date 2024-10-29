@@ -20,6 +20,7 @@ public class Exec {
             System.out.println("2. Ver lista de Associados");
             System.out.println("3. Excluir Associado");
             System.out.println("4. Calcular Boleto");
+            System.out.println("5. Atualizar Associado");
             System.out.print("Digite a opção: ");
             escolha = scanner.nextInt();
             scanner.nextLine();
@@ -211,7 +212,46 @@ public class Exec {
                             break;
                     }
                     break;
-
+                case 5: 
+                	System.out.println("1. Atualizar Associados Anualistas:");
+                    System.out.println("2. Atualizar Associados Mensalistas:");
+                    System.out.print("Digite a opção: ");
+                    int ee = scanner.nextInt();
+                    scanner.nextLine();
+                    if(ee == 1) {
+                    	break;
+                    }else if(ee== 2) {
+                    	crudMensalista.listarMensalistas();
+                    	 System.out.print("Digite o CPF para Aualizar:");
+                         String cpfMensalistaAtualizar = scanner.next();
+                         
+                         System.out.println("Digite o Nome do Associado:");
+                         String nomeMensalista = scanner.next();
+                         scanner.nextLine();
+                         System.out.println("Digite o E-mail do Associado:");
+                         String emailMensalista = scanner.next();
+                         scanner.nextLine();
+                         System.out.println("Digite o valor da mensalidade:");
+                         System.out.print("R$");
+                         BigDecimal mensalidade = scanner.nextBigDecimal();
+                         scanner.nextLine();
+                         System.out.println("Confirmar Atualização?");
+                         System.out.println("1. Finalizar Atualização");
+                         System.out.println("2. Cancelar Atualização");
+                         int e4 = scanner.nextInt();
+                         scanner.nextLine();
+                         switch (e4) {
+                         case 1:
+                             crudMensalista.atualizarMensalista(nomeMensalista, emailMensalista, mensalidade, cpfMensalistaAtualizar);
+                             break;
+                         case 2:
+                             break;
+                         default:
+                             System.out.println("Opção inválida");
+                         
+                         }}
+                    break;
+                    
                 case 6:
                     System.out.println("Encerrando o programa...");
                     break;

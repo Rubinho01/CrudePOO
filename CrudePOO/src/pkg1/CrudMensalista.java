@@ -31,14 +31,12 @@ public class CrudMensalista {
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
-            // Iterando sobre o ResultSet e imprimindo os dados
             while (rs.next()) {
                 String cpf = rs.getString("cpf_mensalista");
                 String nome = rs.getString("nome_mensalista");
                 String email = rs.getString("email_mensalista");
                 double mensalidade = rs.getDouble("mensalidade");
 
-                // Exibindo os dados no console
                 System.out.println("CPF: " + cpf + ", Nome: " + nome + ", Email: " + email + ", Mensalidade: " + mensalidade);
             }
         } catch (SQLException e) {
@@ -52,7 +50,7 @@ public class CrudMensalista {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, cpf);
             int linhasAfetadas = stmt.executeUpdate();
-            if (linhasAfetadas > 0) {
+            if (linhasAfetadas == 1) {
                 System.out.println("Mensalista com CPF " + cpf + " foi excluído com sucesso!");
             } else {
                 System.out.println("Nenhum mensalista encontrado com o CPF " + cpf);
